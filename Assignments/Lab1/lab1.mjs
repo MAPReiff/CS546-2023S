@@ -43,7 +43,7 @@ export const questionTwo = (numArray) => {
   let end = [] // empty array for end result
 
   for (let i = 0; i < numArray.length; i++) {
-    if (numArray[i] >= numArray[i+1]) { // if we encounter a situation where we are out of order (or 2 in a row)
+    if (numArray[i] > numArray[i+1]) { // if we encounter a situation where we are out of order
       isGood = false;
       startBad = i;
       endBad = i+1; // after we have a bad, the next should be good

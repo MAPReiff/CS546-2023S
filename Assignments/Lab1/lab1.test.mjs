@@ -16,7 +16,7 @@ console.log(lab1.questionOne([12, 16, 18]));                                    
 console.log(lab1.questionTwo([1, 2, 3, 4, 2]));                                 // [ false, 3, 4 ]
 console.log(lab1.questionTwo([7, 8, 9, 10, 11]));                               // [ true ]
 console.log(lab1.questionTwo([10, 9, 11, 15]));                                 // [ false, 0, 1 ]
-console.log(lab1.questionTwo([1, 7, 7, 8]));                                    // [ false, 1, 2 ]
+console.log(lab1.questionTwo([1, 7, 7, 8]));                                    // [ true ]
 console.log(lab1.questionTwo([2019, 2020, 2021, 2022, 2023]));                  // [ true ]
 
 
