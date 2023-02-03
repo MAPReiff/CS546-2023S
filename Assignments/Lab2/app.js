@@ -10,7 +10,7 @@ let people = [
   {name: 'Greg', age: '22', location: 'New York', role: 'Student'}, 
   {name: 'Mike', age: '21', location: 'Chicago', role: 'Teacher'} ]; 
 
-import {sortAndFilter} from "./arrayUtils.js";
+import {sortAndFilter, merge} from "./arrayUtils.js";
 
 try {
   // console.log(sortAndFilter(people, ['name', 'asc'], ['location', 'asc'], 'role', 'Student')); 
@@ -25,5 +25,12 @@ try {
   // console.log(sortAndFilter([ {name: 'Ryan', age: '22', location: 'Hoboken', role: 'Student'}, {name: 'Greg', age: 22, location: 'New York', role: 'Student'}], 'location', 'age', '22'));
 
 } catch (e) {
+  console.error(e);
+}
+
+try {
+  // console.log(merge([3,0,"Lab2",2,"Aiden"], ["CS-546" ,"Computer Science",8,15], [6,3,"Patrick",25,29]))
+
+} catch(e) {
   console.error(e);
 }

@@ -5,7 +5,13 @@
       DO NOT CHANGE THE FUNCTION NAMES
 */
 
-export let sortAndFilter = (array, sortBy1, sortBy2, filterBy, filterByTerm) => {
+export let sortAndFilter = (
+  array,
+  sortBy1,
+  sortBy2,
+  filterBy,
+  filterByTerm
+) => {
   // array: array of objects                                              take in an array of objects
   // sortBy1: name of a key, what order to sort that key by               sort those objects by the key specific and asc or desc
   // sortBy2: name of a key, what order to sort that key by               if duplicates above, sort those by this second key and asc or desc
@@ -45,7 +51,6 @@ export let sortAndFilter = (array, sortBy1, sortBy2, filterBy, filterByTerm) => 
       );
     } // not check if all keys are strings
 
-
     let obc = array[i];
 
     keys.forEach((value, index) => {
@@ -59,10 +64,7 @@ export let sortAndFilter = (array, sortBy1, sortBy2, filterBy, filterByTerm) => 
         // empty and spaces not allowed; found the regex for all spaces here https://stackoverflow.com/a/6623263/6331241
         throw new Error("an object contains a blank value or an empty space");
       }
-
     });
-
-
   }
 
   // check sortBy1 parameter
@@ -131,7 +133,9 @@ export let sortAndFilter = (array, sortBy1, sortBy2, filterBy, filterByTerm) => 
   } else if (typeof filterBy != "string") {
     throw new Error("filterBy must be a string");
   } else if (!keys.includes(filterBy)) {
-    throw new Error("the filterBy key is not a key in each object of the array");
+    throw new Error(
+      "the filterBy key is not a key in each object of the array"
+    );
   } else if (filterBy.replace(/ /g, "") == "") {
     // empty and spaces not allowed
     throw new Error("filterBy contains a blank value or an empty space");
@@ -228,7 +232,7 @@ export let sortAndFilter = (array, sortBy1, sortBy2, filterBy, filterByTerm) => 
   return final;
 };
 
-let merge = (...args) => {
+export let merge = (...args) => {
   //this function takes in a variable number of arrays that's what the ...args signifies
   // args will be arrays (so check if any are not an array!)
   // merge all of the arrays
@@ -241,6 +245,76 @@ let merge = (...args) => {
   // must check if each element of the arrays are strings, numbers or another array (and then check again in nested arrays)
   // will need to flatten the array first https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
   // if contains array, array.flat(1); then keep doing that?
+
+  // error checking
+
+  if (args.length < 1) {
+    throw new Error("please supply atleast one array for input");
+  }
+
+  function flatten(input) {
+    // recurivly look at each element, if array then dig in deeper. took this from a work project
+    let output = [];
+    for (let i = 0; i < input.length; i++) {
+      if (Array.isArray(input[i])) {
+        output = output.concat(flatten(input[i]));
+      } else {
+        output.push(input[i]);
+      }
+    }
+    return output;
+  }
+
+  let flat = []; // used to hold the flattened array
+
+  for (let i = 0; i < args.length; i++) {
+    if (!Array.isArray(args[i])) {
+      throw new Error(`input at index ${i} is not an array`);
+    } else if (args[i].length == 0) {
+      throw new Error(`input at index ${i} is an empty array`);
+    }
+    flat.push(flatten(args[i])); // add the flattend arrays to flat
+  }
+
+  flat = flat.flat(); // flatten those
+
+  // now check if the array has only strings and numbers
+
+  for (let i = 0; i < flat.length; i++) {
+    if (
+      typeof flat[i] != "number" &&
+      typeof flat[i] != "string" &&
+      !Array.isArray(flat[i])
+    ) {
+      throw new Error(
+        "input data contains a value that is not a string, a number, or an array"
+      );
+    }
+  }
+
+  // now the actual problem
+
+  let number = []; //empty arrays to hold numbers and strings
+  let string = [];
+
+  for (let i = 0; i < flat.length; i++) {
+    if (typeof flat[i] == "number") {
+      number.push(flat[i]);
+    } else {
+      string.push(flat[i]);
+    }
+  }
+
+  // now we sort the arrays
+  let sortedNumbers = number.sort(function (x, y) {
+    return x - y;
+  });
+
+  let sortedStrings = string.sort();
+
+  let final = sortedNumbers.concat(sortedStrings);
+
+  return final;
 };
 
 let matrixMultiply = (...args) => {
