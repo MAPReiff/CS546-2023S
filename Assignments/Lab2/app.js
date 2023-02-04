@@ -11,6 +11,7 @@ let people = [
   {name: 'Mike', age: '21', location: 'Chicago', role: 'Teacher'} ]; 
 
 import {sortAndFilter, merge} from "./arrayUtils.js";
+import {palindromes, censorWords, distance} from "./stringUtils.js";
 
 try {
   // console.log(sortAndFilter(people, ['name', 'asc'], ['location', 'asc'], 'role', 'Student')); 
