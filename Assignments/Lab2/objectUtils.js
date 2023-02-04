@@ -102,4 +102,55 @@ export let calculateObject = (object, funcs) => {
 
 export let combineObjects = (...args) => {
   //this function takes in a variable number of objects that's what the ...args signifies
+
+  // this specific question says to check if args exists and is an array
+  // but none of the other ..args ones do? Wouldn't supplying no args set
+  // args = []?
+
+  if (typeof args == "undefined") {
+    throw new Error("please supply atleast two objects");
+  } else if (!Array.isArray(args)) {
+    throw new Error("please supply atleast two objects");
+  } else if (args.length < 2) {
+    throw new Error("please supply atleast two objects");
+  }
+
+  for (let i = 0; i < args.length; i++) {
+    if (typeof args[i] != "object") {
+      throw new Error("only objects are valid inputs for this function");
+    } else if (Array.isArray(args[i])) {
+      throw new Error("only objects are valid inputs for this function");
+    } else if (Object.keys(args[i]).length == 0) {
+      throw new Error("only objects with keys valid inputs for this function");
+    }
+  }
+
+  // now the actual problem
+
+  let final = {}; // final object to be returned
+  let allKeys = []; // array of all keys
+
+  for (let i = 0; i < args.length; i++) {
+    allKeys[i] = Object.keys(args[i]);
+  }
+
+  let allKeysFlat = allKeys.flat(); // flattened list
+  let unique = [...new Set(allKeysFlat)]; // only unique values
+
+  for (let i = 0; i < unique.length; i++) {
+    let count = allKeysFlat.filter((element) => element == unique[i]).length; // how often the key exists
+    if (count >= 2) {
+      // if it exists 2 or more times
+      for (let j = 0; j < args.length; j++) {
+        if (args[j].hasOwnProperty(unique[i])) {
+          let ob = args[j];
+          let key = unique[i];
+          final[key] = ob[unique[i]];
+          break;
+        }
+      }
+    }
+  }
+
+  return final;
 };
