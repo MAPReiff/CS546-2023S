@@ -317,7 +317,7 @@ export let merge = (...args) => {
   return final;
 };
 
-let matrixMultiply = (...args) => {
+export let matrixMultiply = (...args) => {
   //this function takes in a variable number of arrays that's what the ...args signifies
   // args will be arrays
   // the arrays will be a matrix such as [ [1, 2, 3], [4, 5, 6] ] or [ [1, 2], [3, 4], [5, 6], [7, 8], [9, 10] ]
