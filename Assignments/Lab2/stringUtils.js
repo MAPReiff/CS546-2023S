@@ -1,3 +1,5 @@
+// I pledge my honor that I have abided by the Stevens Honor System.
+
 /* Todo: Implment the functions below and then export them
       using the ES6 exports syntax. 
       DO NOT CHANGE THE FUNCTION NAMES

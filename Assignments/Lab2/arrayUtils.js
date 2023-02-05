@@ -1,4 +1,4 @@
-//I pledge my honor that I have abided by the Stevens Honor System.
+// I pledge my honor that I have abided by the Stevens Honor System.
 
 /* Todo: Implment the functions below and then export them
       using the module.exports syntax. 

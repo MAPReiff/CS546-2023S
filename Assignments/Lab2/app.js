@@ -1,7 +1,7 @@
+// I pledge my honor that I have abided by the Stevens Honor System.
+
 /* TODO: Import the functions from your three modules here and write two test cases for each function.. You should have a total of 18 test cases. 
 do not forget that you need to create the package.json and add the start command to run app.js as the starting script*/
-
-// import * as arrayUtils from "./arrayUtils.js";
 
 import { sortAndFilter, merge, matrixMultiply } from "./arrayUtils.js";
 import { palindromes, censorWords, distance } from "./stringUtils.js";
