@@ -30,7 +30,7 @@ try {
       "Student"
     )
   );
-  // should return these people in order: Justin, Mitchell, and Gabe
+  // should return these people in order: Justin, Mitchell, and Gabe along with their data
 } catch (e) {
   console.error(e);
 }
@@ -158,8 +158,8 @@ try {
 try {
   console.log(
     censorWords("Why hello there, my name is Fred :)", ["hello", "is", ":)"])
-    // should return  Why !@$#! there, my name @$ Fred #!
   );
+  // should return  Why !@$#! there, my name @$ Fred #!
 } catch (e) {
   console.error(e);
 }
