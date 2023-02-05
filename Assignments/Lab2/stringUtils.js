@@ -130,39 +130,82 @@ export let distance = (string, word1, word2) => {
     throw new Error("input string can not be empty");
   } else if (string.replace(/ /g, "") == "") {
     throw new Error("input string can not be only whitespace");
-  } else if (string.split(" ") < 2) {
+  } else if (string.split(" ").length < 2) {
     throw new Error("input string must be atleast 2 words long");
   }
 
   string = string.toLowerCase();
+  string = string.replaceAll(".", "");
+  string = string.replaceAll(",", "");
+  string = string.replaceAll("!", "");
+  string = string.replaceAll("?", "");
 
-  if (typeof word1 == "undefined") {
+  let word1R = word1.toLowerCase();
+
+  if (typeof word1R == "undefined") {
     throw new Error("no word1 supplied");
-  } else if (typeof word1 != "string") {
+  } else if (typeof word1R != "string") {
     throw new Error("word1 must be a string");
-  } else if (word1.length == 0) {
+  } else if (word1R.length == 0) {
     throw new Error("word1 must not be empty");
-  } else if (word1.replace(/ /g, "") == "") {
+  } else if (word1R.replace(/ /g, "") == "") {
     throw new Error("word1 can not be only whitespace");
-  } else if (!string.includes(word1.toLowerCase())) {
+  } else if (!string.includes(word1R.toLowerCase())) {
     throw new Error("word1 must be part of the input string");
   }
 
-  word1 = word1.toLowerCase();
+  word1 = word1R.replaceAll(" ", "~~");
+  word1 = word1.replaceAll(",", "");
+  word1 = word1.replaceAll(".", "");
+  word1 = word1.replaceAll("!", "");
+  word1 = word1.replaceAll("?", "");
+  string = string.replaceAll(`${word1R} `, `${word1} `);
+  string = string.replaceAll(` ${word1R} `, ` ${word1} `); // takes care of it it starts at the end of a word or ends at the start of a word
 
-  if (typeof word2 == "undefined") {
+  if (
+    string.endsWith(` ${word1R}`) ||
+    string.endsWith(
+      ` ${word1R}.` ||
+        string.endsWith(` ${word1R}!` || string.endsWith(` ${word1R}?`))
+    )
+  ) {
+    // takes care of if it ends with the word withoput a space behind it
+    let last = string.lastIndexOf(` ${word1R}`);
+    string = string.slice(0, last) + ` ${word1}`;
+  }
+
+  let word2R = word2.toLowerCase();
+
+  if (typeof word2R == "undefined") {
     throw new Error("no word2 supplied");
-  } else if (typeof word2 != "string") {
+  } else if (typeof word2R != "string") {
     throw new Error("word2 must be a string");
-  } else if (word2.length == 0) {
+  } else if (word2R.length == 0) {
     throw new Error("word2 must not be empty");
-  } else if (word2.replace(/ /g, "") == "") {
+  } else if (word2R.replace(/ /g, "") == "") {
     throw new Error("word2 can not be only whitespace");
-  } else if (!string.includes(word2.toLowerCase())) {
+  } else if (!string.includes(word2R.toLowerCase())) {
     throw new Error("word2 must be part of the input string");
   }
 
-  word2 = word2.toLowerCase();
+  word2 = word2R.replaceAll(" ", "~~");
+  word2 = word2.replaceAll(",", "");
+  word2 = word2.replaceAll(".", "");
+  word2 = word2.replaceAll("!", "");
+  word2 = word2.replaceAll("?", "");
+  string = string.replaceAll(`${word2R} `, `${word2} `);
+  string = string.replaceAll(` ${word2R} `, ` ${word2} `); // takes care of it it starts at the end of a word or ends at the start of a word
+  if (
+    string.endsWith(` ${word2R}`) ||
+    string.endsWith(
+      ` ${word2R}.` ||
+        string.endsWith(` ${word2R}!` || string.endsWith(` ${word2R}?`))
+    )
+  ) {
+    // takes care of if it ends with the word withoput a space behind it
+    let last = string.lastIndexOf(` ${word2R}`);
+    string = string.slice(0, last) + ` ${word2}`;
+  }
 
   if (word1 == word2) {
     return 0; // distance between itself is 0
@@ -170,21 +213,36 @@ export let distance = (string, word1, word2) => {
 
   // check if word 1 comes before word 2
   let input = string.split(" ");
-  let finalLength = input.length;
+  let finalLength = input.length + 1;
 
-  let count1 = 0;
+  let index1 = [];
+  let index2 = [];
+
+  input.forEach((element, i) => (element == word1 ? index1.push(i) : null));
+  input.forEach((element, i) => (element == word2 ? index2.push(i) : null));
+
+  let spaces = 0;
+  if (word1.includes("~~")) {
+    spaces += (word1.match(/~~/g) || []).length;
+  }
 
   for (let i = 0; i < input.length; i++) {
     if (input[i] == word1) {
       for (let j = 0; j < input.length; j++) {
         if (input[j] == word2) {
           if (i - j - 1 < finalLength) {
-            finalLength = Math.abs(i - j);
+            if (i - j - 1 < !0) {
+              finalLength = Math.abs(i - j);
+            }
           }
         }
       }
     }
   }
 
-  return finalLength;
+  if (finalLength == input.length + 1) {
+    throw new Error("word1 does not come before word2");
+  }
+
+  return finalLength + spaces;
 };
