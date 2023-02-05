@@ -257,6 +257,9 @@ export let merge = (...args) => {
     let output = [];
     for (let i = 0; i < input.length; i++) {
       if (Array.isArray(input[i])) {
+        if (input[i].length == 0) {
+          throw new Error("an empty array was supplied")
+        }
         output = output.concat(flatten(input[i]));
       } else {
         output.push(input[i]);
