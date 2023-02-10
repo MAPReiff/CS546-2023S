@@ -3,7 +3,7 @@
 
 import { getMovies, getUsers } from "./helpers.js";
 
-const getUserById = async (id) => {
+export const getUserById = async (id) => {
   if (typeof id == "undefined") {
     throw new Error("ID is undefined");
   } else if (typeof id != "string") {
@@ -33,7 +33,7 @@ const getUserById = async (id) => {
   return user;
 };
 
-const sameGenre = async (genre) => {
+export const sameGenre = async (genre) => {
   if (typeof genre == "undefined") {
     throw new Error("genre is undefined");
   } else if (typeof genre != "string") {
@@ -76,6 +76,31 @@ const sameGenre = async (genre) => {
   return sorted;
 };
 
-const moviesReviewed = async (id) => {};
+export const moviesReviewed = async (id) => {
+  let user = (await getUserById(id)).username.trim(); // already did the error checking in here
+
+  let movies = await getMovies();
+
+  let reviews = [];
+
+  for (let i = 0; i < movies.length; i++) {
+    let movieReviews = movies[i].reviews;
+    if (movieReviews.length > 0) {
+      for (let j = 0; j < movieReviews.length; j++) {
+        if (movieReviews[j].username.trim() == user) {
+          let ob = {};
+          ob.username = user;
+          ob.rating = movieReviews[j].rating;
+          ob.review = movieReviews[j].review;
+          let fob = {};
+          fob[movies[i].title] = ob;
+          reviews.push(fob);
+        }
+      }
+    }
+  }
+
+  return reviews;
+};
 
 const referMovies = async (id) => {};
