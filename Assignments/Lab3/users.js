@@ -1,3 +1,5 @@
+// I pledge my honor that I have abided by the Stevens Honor System.
+
 //TODO EXPORT AND IMPLEMENT THE FOLLOWING FUNCTIONS IN ES6 FORMAT
 //User data link: https://gist.githubusercontent.com/jdelrosa/381cbe8fae75b769a1ce6e71bdb249b5/raw/564a41f84ab00655524a8cbd9f30b0409836ee39/users.json
 
@@ -137,5 +139,5 @@ export const referMovies = async (id) => {
     // console.log(movies[i].genre.trim().toLowerCase().split("|"));
   }
 
-  console.log(recomend);
+  return recomend;
 };
