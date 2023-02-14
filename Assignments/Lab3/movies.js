@@ -105,7 +105,9 @@ export const getOverallRating = async (title) => {
 
   if (ratings.length != 0) {
     avg = ratings.reduce((x, y) => x + y) / ratings.length;
-    avg = Math.round(avg * 10) / 10;
+    // avg = Math.round(avg * 10) / 10;
+    avg = Math.floor(avg * 10) / 10;
+    // I normally would use .round, but lab specs link to .floor and they have different answers.
   }
 
   return avg;

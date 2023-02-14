@@ -86,17 +86,22 @@ export const moviesReviewed = async (id) => {
   let reviews = [];
 
   for (let i = 0; i < movies.length; i++) {
-    let movieReviews = movies[i].reviews;
-    if (movieReviews.length > 0) {
-      for (let j = 0; j < movieReviews.length; j++) {
-        if (movieReviews[j].username.trim().toLowerCase() == user) {
-          let ob = {};
-          ob.username = user;
-          ob.rating = movieReviews[j].rating;
-          ob.review = movieReviews[j].review;
-          let fob = {};
-          fob[movies[i].title] = ob;
-          reviews.push(fob);
+    if (
+      typeof movies[i].reviews != "undefined" &&
+      Array.isArray(movies[i].reviews)
+    ) {
+      let movieReviews = movies[i].reviews;
+      if (movieReviews.length > 0) {
+        for (let j = 0; j < movieReviews.length; j++) {
+          if (movieReviews[j].username.trim().toLowerCase() == user) {
+            let ob = {};
+            ob.username = user;
+            ob.rating = movieReviews[j].rating;
+            ob.review = movieReviews[j].review;
+            let fob = {};
+            fob[movies[i].title] = ob;
+            reviews.push(fob);
+          }
         }
       }
     }
@@ -110,7 +115,7 @@ export const referMovies = async (id) => {
   let userName = user.username;
   let fav = user.favorite_genre.toLowerCase().trim();
 
-  if (fav == "(no genres listed)") {
+  if (fav == "(no genres listed)" || !fav) {
     return [];
   }
 
