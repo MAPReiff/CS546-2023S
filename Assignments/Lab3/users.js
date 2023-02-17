@@ -79,7 +79,7 @@ export const sameGenre = async (genre) => {
 };
 
 export const moviesReviewed = async (id) => {
-  let user = (await getUserById(id)).username.trim(); // already did the error checking in here
+  let user = (await getUserById(id.trim())).username.trim(); // already did the error checking in here
 
   let movies = await getMovies();
 
@@ -111,7 +111,7 @@ export const moviesReviewed = async (id) => {
 };
 
 export const referMovies = async (id) => {
-  let user = await getUserById(id);
+  let user = await getUserById(id.trim());
   let userName = user.username;
   let fav = user.favorite_genre.toLowerCase().trim();
 
