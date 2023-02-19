@@ -9,5 +9,8 @@
     "start": "node app.js"
   },
   "author": "Mitchell Reiff 10440996",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^5.0.1"
+  }
 }
