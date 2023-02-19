@@ -1,26 +1,12 @@
 import { ObjectId } from "mongodb";
 import { bands } from "../config/mongoCollections.js";
-import { isURL, oIDChecker } from "../helpers.js"; // used to validate if website is a valid url
+import { isURL, oIDChecker, idToOID } from "../helpers.js";
 
 export const get = async (id) => {
-  if (typeof id == "undefined") {
-    throw new Error("please provide a valid ID string");
-  } else if (typeof id != "string") {
-    throw new Error("please provide a valid ID string");
-  }
-
-  id = id.trim();
-
-  if (id.length == 0) {
-    throw new Error("ObjectID can not be blank or spaces");
-  }
-
-  if (oIDChecker(id) == false) {
-    throw new Error("the provided id is not a valid ObjectID for mongo");
-  }
+  let oID = idToOID(id);
 
   const bandCollection = await bands();
-  const band = await bandCollection.findOne({ _id: new ObjectId(id) });
+  const band = await bandCollection.findOne({ _id: oID });
 
   if (band == null) {
     throw new Error("there is no band that matches the provided ID");
@@ -31,4 +17,6 @@ export const get = async (id) => {
   return band;
 };
 
-console.log(await get("63f2821c429d21ddf232e60b"));
+
+
+console.log(await rename("63f28c54a8de2fd30a3034e7", "2"));

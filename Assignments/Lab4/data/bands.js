@@ -1,4 +1,4 @@
-import { isURL, oIDChecker } from "../helpers.js"; // used to validate if website is a valid url
+import { isURL, oIDChecker, idToOID } from "../helpers.js";
 import { ObjectId } from "mongodb";
 import { bands } from "../config/mongoCollections.js";
 
@@ -181,24 +181,10 @@ export const getAll = async () => {
 };
 
 export const get = async (id) => {
-  if (typeof id == "undefined") {
-    throw new Error("please provide a valid ID string");
-  } else if (typeof id != "string") {
-    throw new Error("please provide a valid ID string");
-  }
-
-  id = id.trim();
-
-  if (id.length == 0) {
-    throw new Error("ObjectID can not be blank or spaces");
-  }
-
-  if (oIDChecker(id) == false) {
-    throw new Error("the provided id is not a valid ObjectID for mongo");
-  }
+  let oID = idToOID(id);
 
   const bandCollection = await bands();
-  const band = await bandCollection.findOne({ _id: new ObjectId(id) });
+  const band = await bandCollection.findOne({ _id: oID });
 
   if (band == null) {
     throw new Error("there is no band that matches the provided ID");
@@ -209,6 +195,85 @@ export const get = async (id) => {
   return band;
 };
 
-export const remove = async (id) => {};
+export const remove = async (id) => {
+  let oID = idToOID(id);
 
-export const rename = async (id, newName) => {};
+  const bandCollection = await bands();
+  const band = await bandCollection.findOne({ _id: oID });
+
+  if (band == null) {
+    throw new Error("there is no band that matches the provided ID");
+  }
+
+  const deleteBand = await bandCollection.findOneAndDelete({ _id: oID });
+
+  // console.log(deleteBand)
+
+  if (deleteBand.lastErrorObject.n === 0) {
+    throw new Error("unable to delete band with the given ID");
+  }
+
+  return `${band.name} has been successfully deleted!`;
+};
+
+export const rename = async (id, newName) => {
+  let oID = idToOID(id);
+
+  if (typeof newName == "undefined") {
+    throw new Error("please provide a name string");
+  } else if (typeof newName != "string") {
+    throw new Error("please provide a name string");
+  }
+
+  newName = newName.trim();
+  if (newName.replaceAll(" ", "").length == 0) {
+    throw new Error("Name string must contain text and not only spaces");
+  }
+
+  const bandCollection = await bands();
+  const band = await bandCollection.findOne({ _id: oID });
+
+  if (band == null) {
+    throw new Error("there is no band that matches the provided ID");
+  }
+
+  band.name = newName;
+
+  const updateBand = await bandCollection.findOneAndUpdate(
+    { _id: oID },
+    { $set: band },
+    { returnDocument: "after" }
+  );
+
+  if (updateBand.lastErrorObject.n === 0) {
+    throw new Error("unable to update band with the given ID");
+  }
+
+  band._id = band._id.toString();
+
+  return band;
+};
+
+// await create(
+//   "Black Sabbath",
+//   ["Heavy Metal"],
+//   "http://www.blacksabbath.com",
+//   "Warner Records",
+//   ["Ozzy Osbourne", "Bill Ward", "Geezer Butler", "Tony Iommi"],
+//   1968
+// );
+
+// await create(
+//   "Pink Floyd",
+//   ["Progressive Rock", "Psychedelic rock", "Classic Rock"],
+//   "http://www.pinkfloyd.com",
+//   "EMI",
+//   [
+//     "Roger Waters",
+//     "David Gilmour",
+//     "Nick Mason",
+//     "Richard Wright",
+//     "Sid Barrett",
+//   ],
+//   1965
+// );
