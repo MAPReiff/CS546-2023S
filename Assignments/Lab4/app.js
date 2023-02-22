@@ -1,3 +1,5 @@
+// I pledge my honor that I have abided by the Stevens Honor System.
+
 import * as bands from "./data/bands.js";
 import { closeConnection } from "./config/mongoConnection.js";
 

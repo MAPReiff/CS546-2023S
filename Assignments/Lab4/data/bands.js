@@ -1,3 +1,5 @@
+// I pledge my honor that I have abided by the Stevens Honor System.
+
 import { isURL, oIDChecker, idToOID } from "../helpers.js";
 import { ObjectId } from "mongodb";
 import { bands } from "../config/mongoCollections.js";
