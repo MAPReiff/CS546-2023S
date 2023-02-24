@@ -239,6 +239,10 @@ export const rename = async (id, newName) => {
     throw new Error("there is no band that matches the provided ID");
   }
 
+  if(band.name == newName) {
+    throw new Error("unable to rename the band as you provided the same name");
+  }
+
   band.name = newName;
 
   const updateBand = await bandCollection.findOneAndUpdate(
