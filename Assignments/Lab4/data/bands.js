@@ -63,7 +63,7 @@ export const create = async (
   }
 
   // start with http://www., end with .com, and have 5 characters inbetween
-  if (!website.startsWith("http://www.") || !website.endsWith(".com")) {
+  if (!website.toLowerCase().startsWith("http://www.") || !website.toLowerCase().endsWith(".com")) {
     throw new Error(
       `website string MUST start with "http://", MUST end with ".com", and must contain atleast 5 characters inbetween them`
     );
@@ -260,14 +260,14 @@ export const rename = async (id, newName) => {
   return band;
 };
 
-// await create(
+// console.log(await create(
 //   "Black Sabbath",
 //   ["Heavy Metal"],
-//   "http://www.blacksabbath.com",
+//   "http://wWw.blacksabbath.COM",
 //   "Warner Records",
 //   ["Ozzy Osbourne", "Bill Ward", "Geezer Butler", "Tony Iommi"],
 //   1968
-// );
+// ));
 
 // await create(
 //   "Pink Floyd",
