@@ -24,7 +24,7 @@ let aboutMe = {
   firstName: "Mitchell",
   lastName: "Reiff",
   biography:
-    "My name is Mitchell and I am currently in my 8th semester of Computer Engineering studying at Stevens Institute of Technology. Throughout my 8 semesters, I have taken courses in computer programming, electrical engineering, as well as general engineering.\nIn addition to my studies, I also currently work as an E-Commerce IT Technician at Conair LLC in the IT department assisting with e-commerce and IT projects. The scope of my work can vary widely, but normally consists of working with Salesforce Commerce Cloud and managing our external development teams to facilitate the creation of new sites, feature requests	, and bug fixes. Working full time and going to school full time has been a challenge, but who isn't up for a good challenge?",
+    "My name is Mitchell and I am currently in my 8th semester of Computer Engineering studying at Stevens Institute of Technology. Throughout my 8 semesters, I have taken courses in computer programming, electrical engineering, as well as general engineering.\nIn addition to my studies, I also currently work as an E-Commerce IT Technician at Conair LLC in the IT department assisting with e-commerce and IT projects. The scope of my work can vary widely, but normally consists of working with Salesforce Commerce Cloud and managing our external development teams to facilitate the creation of new sites, feature requests, and bug fixes. Working full time and going to school full time has been a challenge, but who isn't up for a good challenge?",
   favoriteMovies: [
     "A Christmas Story",
     "Accidental Courtesy: Daryl Davis, Race & America",
