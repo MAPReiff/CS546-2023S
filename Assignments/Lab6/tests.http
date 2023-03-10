@@ -44,3 +44,7 @@ Content-Type: application/json
     "groupMembers": ["Roger Waters", "David Gilmour", "Nick Mason", "Richard Wright", "Sid Barrett" ],
     "yearBandWasFormed": 1965
 }
+
+###
+
+delete http://localhost:3000/bands/640bb4abfb80d0333916ad62

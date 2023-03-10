@@ -105,6 +105,25 @@ routerBands
   })
   .delete(async (req, res) => {
     //code here for DELETE
+    let good = false;
+    try {
+      idToOID(req.params.id); //handles validating input is a string and is a valid object ID
+      good = true;
+    } catch (e) {
+      res.status(400).json({ error: `${e}` });
+    }
+
+    if (good == true) {
+      try {
+        await bands.remove(req.params.id);
+        let obj = {};
+        obj.bandId = req.params.id.toString();
+        obj.deleted = true;
+        res.status(200).json(obj);
+      } catch (e) {
+        res.status(404).json({ error: `${e}` });
+      }
+    }
   })
   .put(async (req, res) => {
     //code here for PUT
