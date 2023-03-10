@@ -2,7 +2,11 @@
 
 import * as bands from "./data/bands.js";
 import * as albums from "./data/albums.js";
-import { closeConnection } from "./config/mongoConnection.js";
+import { dbConnection, closeConnection } from "./config/mongoConnection.js";
+
+const db = await dbConnection();
+await db.dropDatabase();
+
 
 // Make bands and some albums
 
@@ -291,14 +295,4 @@ try {
   console.error(e);
 }
 
-// try {
-
-// } catch (e) {
-//   console.error(e);
-// }
-
-// try {
-
-// } catch (e) {
-//   console.error(e);
-// }
+await closeConnection();
