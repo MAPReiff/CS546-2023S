@@ -7,3 +7,15 @@
     - When the route is /albums use the routes defined in albums.js routing file
     - All other enpoints should respond with a 404 as shown in the lecture code
 */
+
+import {routerAlbums} from "./albums.js";
+import {routerBands} from "./bands.js";
+
+export const routesMethod = (app) => {
+  app.use("/albums", routerAlbums);
+  app.use("/bands", routerBands);
+
+  app.use("*", (req, res) => {
+    res.status(404).json({ error: "404 not found" });
+  })
+}

@@ -3,8 +3,11 @@
 // Import the express router as shown in the lecture code
 // Note: please do not forget to export the router!
 
-router
-  .route('/:bandId')
+import { Router } from "express";
+export const routerAlbums = Router();
+
+routerAlbums
+  .route('/:bandId') // http://localhost:3000/albums/id_string
   .get(async (req, res) => {
     //code here for GET
   })
@@ -12,8 +15,8 @@ router
     //code here for POST
   });
 
-router
-  .route('/album/:albumId')
+  routerAlbums
+  .route('/album/:albumId') // http://localhost:3000/albums/album/id_string
   .get(async (req, res) => {
     //code here for GET
   })
