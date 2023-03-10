@@ -6,7 +6,7 @@
 import { Router } from "express";
 export const routerBands = Router();
 import { bands } from "../data/index.js";
-import { bandCreateError } from "../helpers.js";
+import { bandCreateError, idToOID, bandUpdateError } from "../helpers.js";
 
 routerBands
   .route("/") // http://localhost:3000/bands/
@@ -88,10 +88,92 @@ routerBands
   .route("/:id") // http://localhost:3000/bands/id_string
   .get(async (req, res) => {
     //code here for GET
+    let good = false;
+    try {
+      idToOID(req.params.id); //handles validating input is a string and is a valid object ID
+      good = true;
+    } catch (e) {
+      res.status(400).json({ error: `${e}` });
+    }
+    if (good == true) {
+      try {
+        res.status(200).json(await bands.get(req.params.id));
+      } catch (e) {
+        res.status(404).json({ error: `${e}` });
+      }
+    }
   })
   .delete(async (req, res) => {
     //code here for DELETE
   })
   .put(async (req, res) => {
     //code here for PUT
+
+    let good = false;
+    let good2 = false;
+    try {
+      idToOID(req.params.id);
+      good = true;
+    } catch (e) {
+      res.status(400).json({ error: `${e}` });
+    }
+    if (good == true) {
+      try {
+        await bands.get(req.params.id);
+        good2 = true;
+      } catch (e) {
+        res.status(404).json({ error: `${e}` });
+      }
+    }
+    if (good2 == true) {
+      // id is valid, and the band exists, rest are all 400 codes
+      try {
+        if (
+          req.body.hasOwnProperty("name") &&
+          req.body.hasOwnProperty("genre") &&
+          req.body.hasOwnProperty("website") &&
+          req.body.hasOwnProperty("recordCompany") &&
+          req.body.hasOwnProperty("groupMembers") &&
+          req.body.hasOwnProperty("yearBandWasFormed") &&
+          Object.keys(req.body).length == 6
+        ) {
+          let errorCheck = await bandUpdateError(
+            req.params.id,
+            req.body.name,
+            req.body.genre,
+            req.body.website,
+            req.body.recordCompany,
+            req.body.groupMembers,
+            req.body.yearBandWasFormed,
+            "route"
+          );
+
+          let id = errorCheck[0];
+          let name = errorCheck[1];
+          let genre = errorCheck[2];
+          let website = errorCheck[3];
+          let recordCompany = errorCheck[4];
+          let groupMembers = errorCheck[5];
+          let yearBandWasFormed = errorCheck[6];
+
+          res
+            .status(200)
+            .json(
+              await bands.update(
+                id,
+                name,
+                genre,
+                website,
+                recordCompany,
+                groupMembers,
+                yearBandWasFormed
+              )
+            );
+        } else {
+          throw new Error("input JSON is missing a key");
+        }
+      } catch (e) {
+        res.status(400).json({ error: `${e}` });
+      }
+    }
   });
