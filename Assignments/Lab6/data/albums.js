@@ -172,8 +172,50 @@ export const create = async (bandId, title, releaseDate, tracks, rating) => {
   return album;
 };
 
-const getAll = async (bandId) => {};
+export const getAll = async (bandId) => {
+  let oID = idToOID(bandId);
 
-const get = async (albumId) => {};
+  const bandCollection = await bands();
+  const band = await bandCollection.findOne({ _id: oID });
 
-const remove = async (albumId) => {};
+  if (band == null) {
+    throw new Error("there is no band that matches the provided ID");
+  }
+
+  if (band.albums == []) {
+    return [];
+  } else {
+    for (let i = 0; i < band.albums.length; i++) {
+      band.albums[i]._id = band.albums[i]._id.toString();
+    }
+
+    return band.albums;
+  }
+};
+
+export const get = async (albumId) => {
+  let oID = idToOID(albumId);
+
+  const bandCollection = await bands();
+  const band = await bandCollection.findOne({
+    "albums._id": {
+      $eq: oID,
+    },
+  });
+
+  if (band == null) {
+    throw new Error("there is no album that matches the provided ID");
+  }
+
+  for (let i = 0; i < band.albums.length; i++) {
+    if (band.albums[i]._id.toString() == oID.toString()) {
+      band.albums[i]._id = band.albums[i]._id.toString();
+      return band.albums[i];
+    }
+  }
+
+  // it should not even be possible to get here but just in case
+  throw new Error("there is no album that matches the provided ID");
+};
+
+export const remove = async (albumId) => {};
