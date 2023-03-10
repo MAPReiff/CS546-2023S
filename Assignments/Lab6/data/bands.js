@@ -6,7 +6,7 @@ import {
   oIDChecker,
   idToOID,
   areObjectsEqual,
-  albumCreateError,
+  bandCreateError,
 } from "../helpers.js";
 import { ObjectId } from "mongodb";
 import { bands } from "../config/mongoCollections.js";
@@ -22,7 +22,7 @@ export const create = async (
   yearBandWasFormed // number; throw an error if it is less than 1900 or greater than current year 2023 (wonder if I can make this dynamic rather than hardcode the end date)
 ) => {
   // since we need the error handling in the routes, I made this a function
-  let good = await albumCreateError(
+  let good = await bandCreateError(
     name,
     genre,
     website,

@@ -75,7 +75,7 @@ export const areObjectsEqual = (...args) => {
 };
 
 // error checking create as it is used in 2 places
-export const albumCreateError = (
+export const bandCreateError = (
   name,
   genre,
   website,

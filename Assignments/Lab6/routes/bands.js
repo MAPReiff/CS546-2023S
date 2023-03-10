@@ -6,7 +6,7 @@
 import { Router } from "express";
 export const routerBands = Router();
 import { bands } from "../data/index.js";
-import { albumCreateError } from "../helpers.js";
+import { bandCreateError } from "../helpers.js";
 
 routerBands
   .route("/") // http://localhost:3000/bands/
@@ -50,7 +50,7 @@ routerBands
         let groupMembers = req.body.groupMembers;
         let yearBandWasFormed = req.body.yearBandWasFormed;
 
-        let good = await albumCreateError(
+        let good = await bandCreateError(
           req.body.name,
           req.body.genre,
           req.body.website,
