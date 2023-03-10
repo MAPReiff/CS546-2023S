@@ -18,7 +18,7 @@ try {
   blacksabbath = await bands.create(
     "Black Sabbath",
     ["Heavy Metal"],
-    "http://www.blacksabbath.com",
+    "http://www.blacksabbath.cOM",
     "Warner Records",
     ["Ozzy Osbourne", "Bill Ward", "Geezer Butler", "Tony Iommi"],
     1968

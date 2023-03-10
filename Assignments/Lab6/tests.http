@@ -1,0 +1,29 @@
+get http://localhost:3000/bands
+
+### valid band post
+
+post http://localhost:3000/bands
+Content-Type: application/json
+
+{
+    "name": "Pink Floyd",    
+    "genre": ["Progressive Rock", "Psychedelic rock", "Classic Rock"],
+    "website": "http://www.pinkfloyd.com",
+    "recordCompany": "EMI",
+    "groupMembers": ["Roger Waters", "David Gilmour", "Nick Mason", "Richard Wright", "Sid Barrett" ],
+    "yearBandWasFormed": 1965
+}
+
+### invalid band post (changed website to .org)
+
+post http://localhost:3000/bands
+Content-Type: application/json
+
+{
+    "name": "Pink Floyd",    
+    "genre": ["Progressive Rock", "Psychedelic rock", "Classic Rock"],
+    "website": "http://www.pinkfloyd.org",
+    "recordCompany": "EMI",
+    "groupMembers": ["Roger Waters", "David Gilmour", "Nick Mason", "Richard Wright", "Sid Barrett" ],
+    "yearBandWasFormed": 1965
+}
