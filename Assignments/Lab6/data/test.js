@@ -41,7 +41,9 @@ const create = async (bandId, title, releaseDate, tracks, rating) => {
 
   if (!validateDate(releaseDate, "boolean", "mm/dd/yyyy")) {
     // this npm package validates the date with the specified formatting!
-    throw new Error("releaseDate string must contain a valid date formatted as MM/DD/YYYY");
+    throw new Error(
+      "releaseDate string must contain a valid date formatted as MM/DD/YYYY"
+    );
   }
 
   if (
@@ -111,6 +113,15 @@ const create = async (bandId, title, releaseDate, tracks, rating) => {
   }
   */
 
+  // a TA (Jan) said we should account for this, but it did not specify in the lab specs
+  // https://stevenswebdevs2023.slack.com/archives/C04GT4VC2CW/p1678318847241089?thread_ts=1678317856.033719&cid=C04GT4VC2CW
+  if (band.albums.length != 0) {
+    for (let i = 0; i < band.albums.length; i++) {
+      if (band.albums[i].title == title) {
+        throw new Error("unable to add that album as it already exists for this band")
+      }
+    }
+  }
   let oIDAlbum = new ObjectId();
 
   let album = {
@@ -118,21 +129,56 @@ const create = async (bandId, title, releaseDate, tracks, rating) => {
     title: title,
     releaseDate: releaseDate,
     tracks: tracks,
-    rating: rating
+    rating: rating,
+  };
+
+  band.albums.push(album);
+
+  let avg = 0;
+
+  for (let i = 0; i < band.albums.length; i++) {
+    avg += band.albums[i].rating;
   }
 
-  // band.
+  avg = avg / band.albums.length;
+  // avg = Math.round(avg * 10) / 10;
+  avg = Math.floor(avg * 10) / 10;
 
+  band.rating = avg;
 
+  const updatedBand = await bandCollection.findOneAndUpdate(
+    { _id: oID },
+    { $set: band },
+    { returnDocument: "after" }
+  );
 
+  if (updatedBand.lastErrorObject.n === 0) {
+    throw new Error("unable to update band with the new album");
+  }
+
+  const addedBand = await bandCollection.findOne({
+    _id: new ObjectId(band._id),
+  });
+  addedBand._id = addedBand._id.toString();
+
+  return addedBand;
 };
 
-let releaseDate = "03/03/23"
-
-// validateDate('02/27/2001', responseType="boolean", dateFormat="mm/dd/yyyy"); // returns true
-
-console.log(validateDate("03/23/2001", "boolean", "mm/dd/yyyy"))
-
-// if (!validateDate(releaseDate, responseType="boolean", dateFormat="mm/dd/yyyy")) {
-//   throw new Error("releaseDate string must contain a valid date formatted as MM/DD/YYYY");
-// }
+console.log(
+  await create(
+    "640a60b0a94d13d5d8dc65a1",
+    "Paranoidv2",
+    "09/18/1970",
+    [
+      "War Pigs",
+      "Paranoid",
+      "Planet Caravan",
+      "Iron Man",
+      "Electric Funeral",
+      "Hand of Doom",
+      "Rat Salad",
+      "Fairies Wear Boots",
+    ],
+    4.5
+  )
+);
