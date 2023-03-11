@@ -95,7 +95,39 @@ routerAlbums
   .route("/album/:albumId") // http://localhost:3000/albums/album/id_string
   .get(async (req, res) => {
     //code here for GET
+    let good = false;
+    try {
+      idToOID(req.params.albumId);
+      good = true;
+    } catch (e) {
+      res.status(400).json({ error: `${e}` });
+    }
+    if (good == true) {
+      try {
+        res.status(200).json(await albums.get(req.params.albumId));
+      } catch (e) {
+        res.status(404).json({ error: `${e}` });
+      }
+    }
   })
   .delete(async (req, res) => {
     //code here for DELETE
+    let good = false;
+    try {
+      idToOID(req.params.albumId);
+      good = true;
+    } catch (e) {
+      res.status(400).json({ error: `${e}` });
+    }
+    if (good == true) {
+      try {
+        await albums.remove(req.params.albumId);
+        let obj = {};
+        obj.albumId = req.params.albumId.toString();
+        obj.deleted = true;
+        res.status(200).json(obj);
+      } catch (e) {
+        res.status(404).json({ error: `${e}` });
+      }
+    }
   });
