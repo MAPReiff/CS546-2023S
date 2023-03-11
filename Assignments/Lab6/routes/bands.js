@@ -5,8 +5,9 @@
 
 import { Router } from "express";
 export const routerBands = Router();
+
 import { bands } from "../data/index.js";
-import { bandCreateError, idToOID, bandUpdateError } from "../helpers.js";
+import { idToOID, bandCreateError, bandUpdateError } from "../helpers.js";
 
 routerBands
   .route("/") // http://localhost:3000/bands/
@@ -77,7 +78,7 @@ routerBands
         );
         res.status(200).json(newBand);
       } else {
-        throw new Error("input JSON is missing a key");
+        throw new Error("input JSON does not have the correct keys");
       }
     } catch (e) {
       res.status(400).json({ error: `${e}` }); // for some reason just e on its own doesnt work
@@ -163,8 +164,7 @@ routerBands
             req.body.website,
             req.body.recordCompany,
             req.body.groupMembers,
-            req.body.yearBandWasFormed,
-            "route"
+            req.body.yearBandWasFormed
           );
 
           let id = errorCheck[0];
@@ -189,7 +189,7 @@ routerBands
               )
             );
         } else {
-          throw new Error("input JSON is missing a key");
+          throw new Error("input JSON does not have the correct keys");
         }
       } catch (e) {
         res.status(400).json({ error: `${e}` });
