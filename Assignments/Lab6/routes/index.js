@@ -8,8 +8,8 @@
     - All other enpoints should respond with a 404 as shown in the lecture code
 */
 
-import {routerAlbums} from "./albums.js";
-import {routerBands} from "./bands.js";
+import { routerAlbums } from "./albums.js";
+import { routerBands } from "./bands.js";
 
 export const routesMethod = (app) => {
   app.use("/albums", routerAlbums);
@@ -17,5 +17,5 @@ export const routesMethod = (app) => {
 
   app.use("*", (req, res) => {
     res.status(404).json({ error: "404 not found" });
-  })
-}
+  });
+};

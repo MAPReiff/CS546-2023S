@@ -1,6 +1,6 @@
 // I pledge my honor that I have abided by the Stevens Honor System.
 
-import { dbConnection } from './mongoConnection.js';
+import { dbConnection } from "./mongoConnection.js";
 
 const getCollectionFn = (collection) => {
   let _col = undefined;
@@ -16,4 +16,4 @@ const getCollectionFn = (collection) => {
 };
 
 // Note: You will need to change the code below to have the collection required by the assignment!
-export const bands = getCollectionFn('bands');
+export const bands = getCollectionFn("bands");
