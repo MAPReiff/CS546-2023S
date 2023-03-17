@@ -153,6 +153,20 @@ export const remove = async (albumId) => {
     }
   }
 
+  let avg = 0;
+
+  if (band.albums.length != 0) {
+    for (let i = 0; i < band.albums.length; i++) {
+      avg += band.albums[i].rating;
+    }
+
+    avg = avg / band.albums.length;
+    // avg = Math.round(avg * 10) / 10;
+    avg = Math.floor(avg * 10) / 10;
+  }
+
+  band.overallRating = avg;
+
   const updatedBand = await bandCollection.findOneAndUpdate(
     { _id: band._id },
     { $set: band },

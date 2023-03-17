@@ -51,15 +51,15 @@ delete http://localhost:3000/bands/640bb4abfb80d0333916ad62
 
 ###
 
-post http://localhost:3000/albums/640bc8c93b10d64430afdaa2
+post http://localhost:3000/albums/6414ac93e12561b3656e4cf5
 Content-Type: application/json
 
 { 
   "title": "Wish You Were Here2",
   "releaseDate": "09/12/1975",
   "tracks": ["Shine On You Crazy Diamond, Pts. 1-5", "Welcome to the Machine","Have a Cigar (Ft. Roy Harper)", "Wish You Were Here","Shine On You Crazy Diamond, Pts. 6-9"],
-  "rating": 4.98
+  "rating": 4.9
 }
 
 ###
-delete http://localhost:3000/albums/album/640bc8c93b10d64430afdaa1
+delete http://localhost:3000/albums/album/6414ad44b2b0811131bea29a
