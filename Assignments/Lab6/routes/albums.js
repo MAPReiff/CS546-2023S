@@ -76,12 +76,8 @@ routerAlbums
           let releaseDate = errorCheck[2];
           let tracks = errorCheck[3];
           let rating = errorCheck[4];
-
-          res
-            .status(200)
-            .json(
-              await albums.create(bandId, title, releaseDate, tracks, rating)
-            );
+          await albums.create(bandId, title, releaseDate, tracks, rating);
+          res.status(200).json(await bands.get(req.params.bandId));
         } else {
           throw new Error("input JSON does not have the correct keys");
         }
