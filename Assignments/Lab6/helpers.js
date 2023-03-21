@@ -466,10 +466,10 @@ export const albumCreateError = async (
 
   if (
     Date.parse(releaseDate) < Date.parse("1900") ||
-    Date.parse(releaseDate) > Date.parse(new Date().getFullYear() + 1)
+    Date.parse(releaseDate) > Date.parse(new Date().getFullYear() + 1 + 1) // 2025 as 2024 can be included
   ) {
     throw new Error(
-      `the provided date is not in the valid range of 1900 - ${new Date().getFullYear()}`
+      `the provided date is not in the valid range of 1900 - ${new Date().getFullYear() +1}`
     );
   }
 
