@@ -69,7 +69,7 @@ This page will respond with a valid HTML document. The title of the document sho
 Your page should reference a CSS file, `/public/css/main-styles.css`; this file should have _at least 5 rulesets_ that apply to this page; these 5 rules can also apply to elements on `/`, or be unique to this page.
 
 You should have a `main` element, and inside of the `main` element have a `ol` tag that has a list of up to 10 venues (the first 10 that appear in the search result array) matching the `searchVenueTerm` found in the request body in the following format (after searching `Madison`).
-```
+```html
 <ol>
    <li>
       <a href="/venuedetails/KovZpZA7AAEA">Madison Square Garden</a> </li> 
@@ -105,7 +105,7 @@ You should have a `main` element, and inside of the `main` element have a `ol` t
 You must also provide an `a` tag that links back to your `/` route with the text `Make another search`.
 
 If no matches are found, you will print the following HTML paragraph:
-```
+```html
  <p class="not-found">We're sorry, but no results were found for {{searchVenueTerm}}.</p>
  ```
 
@@ -121,33 +121,27 @@ Your page should reference a CSS file, `/public/css/main-styles.css`; this file 
 You should have a `main` element, and inside of the `main` element have a `div` tag, inside the div tag you have the following children elements:  In an `h2` element, you will display the name of the venue, an `img` element that contains the image of the venue, you will set the source of the img to be the url for the venue image contained in the data(shown below in the images array) and set the `alt` attribute to the venue name (as shown below in sample HTML), an `a` element that will link to the venue's website in a new tab with the text "`Venue Information on Ticketmaster`", an `address` element that contains the text "Address:" and then display the address, the city, state, and postal code for that venue (in the data, these are the `address.line1`, `city.name`, `state.stateCode` and `postalCode` fields), and finally another `address` element  that contains the text "Phone:" and then display the venue's phone number field (`boxOfficeInfo.phoneNumberDetail` field in the data).  **IF ANY OF THIS DATA IS MISSING FROM THE API, YOU WILL DISPLAY "N/A" FOR THE FIELDS THAT DO NOT HAVE DATA, IF THERE IS NO IMAGE FOR A VENUE, USE A "NO PHOTO" DEFAULT IMAGE (I have supplied one in the /public/images directory in the code stub)**
 
 Matching Venue Data:
-```
+```json
 {
   "name": "Madison Square Garden",
   "type": "venue",
   "id": "KovZpZA7AAEA",
   "test": false,
-  "url": "[https://www.ticketmaster.com/madison-square-garden-tickets-new-york/venue/483329
-    
-
-Links to an external site.](https://www.ticketmaster.com/madison-square-garden-tickets-new-york/venue/483329)",
+  "url": "https://www.ticketmaster.com/madison-square-garden-tickets-new-york/venue/483329",
   "locale": "en-us",
-  "aliases": \[
+  "aliases": [
     "msg",
     "madison square garden"
-  \],
-  "images": \[
+  ],
+  "images": [
     {
       "ratio": "16\_9",
-      "url": "[https://s1.ticketm.net/dbimages/15646v.jpg
-    
-
-Links to an external site.](https://s1.ticketm.net/dbimages/15646v.jpg)",
+      "url": "https://s1.ticketm.net/dbimages/15646v.jpg",
       "width": 205,
       "height": 115,
       "fallback": false
     }
-  \],
+  ],
   "postalCode": "10001",
   "timezone": "America/New\_York",
   "city": {
@@ -168,7 +162,7 @@ Links to an external site.](https://s1.ticketm.net/dbimages/15646v.jpg)",
     "longitude": "-73.9916006",
     "latitude": "40.7497062"
   },
-  "markets": \[
+  "markets": [
     {
       "name": "New York/Tri-State Area",
       "id": "35"
@@ -185,8 +179,8 @@ Links to an external site.](https://s1.ticketm.net/dbimages/15646v.jpg)",
       "name": "Connecticut",
       "id": "124"
     }
-  \],
-  "dmas": \[
+  ],
+  "dmas": [
     {
       "id": 200
     },
@@ -199,7 +193,7 @@ Links to an external site.](https://s1.ticketm.net/dbimages/15646v.jpg)",
     {
       "id": 422
     }
-  \],
+  ],
   "social": {
     "twitter": {
       "handle": "@TheGarden"
@@ -236,7 +230,7 @@ Links to an external site.](https://s1.ticketm.net/dbimages/15646v.jpg)",
 ```
 
 HTML Printed (YOU MUST MATCH THIS EXACTLY!!!!):
-```
+```html
 <div>
   <h2>Madison Square Garden</h2>
   <img alt="Madison Square Garden" src="https://s1.ticketm.net/dbimages/15646v.jpg">
