@@ -3,15 +3,21 @@
 https://github.com/stevens-cs546-cs554/CS-546/tree/master/lecture_08/code/HTML_Templating }}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <title>{{title}}</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
   <link rel="stylesheet" href="/public/css/main-styles.css">
 </head>
 
 <body>
+  {{#if useHeader}}
+  <header>
+    <h1>{{title}}</h1>
+  </header>
+  {{/if}}
   <main>
     {{{body}}}
   </main>

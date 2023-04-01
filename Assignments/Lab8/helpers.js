@@ -3,6 +3,7 @@
 import axios from "axios";
 
 let apikey = "9UiUrVuZCsrYgUDIy8EG6oXXVYFn13RJ";
+// going to reset this key after the lab is graded
 
 export async function searchVenues(searchTerm) {
   // is checking the input even needed here?
@@ -12,9 +13,15 @@ export async function searchVenues(searchTerm) {
     throw new Error("search term can not be an empty string");
   }
 
-  const data = await axios.get(
-    `https://app.ticketmaster.com/discovery/v2/venues?keyword=${searchTerm}&apikey=${apikey}&countryCode=US`
-  );
+  let data;
+
+  try {
+    data = await axios.get(
+      `https://app.ticketmaster.com/discovery/v2/venues?keyword=${searchTerm}&apikey=${apikey}&countryCode=US`
+    );
+  } catch (e) {
+    throw new Error(`unable to search the Ticketmaster API for ${searchTerm}`);
+  }
 
   return data;
 }
@@ -28,9 +35,15 @@ export async function getVenue(venueID) {
     throw new Error("the venue ID can not be an empty string");
   }
 
-  const data = await axios.get(
-    `https://app.ticketmaster.com/discovery/v2/venues/${venueID}.json?apikey=${apikey}`
-  );
+  let data;
+
+  try {
+    data = await axios.get(
+      `https://app.ticketmaster.com/discovery/v2/venues/${venueID}.json?apikey=${apikey}`
+    );
+  } catch (e) {
+    throw new Error(`unable to search the Ticketmaster API for ${venueID}`);
+  }
 
   return data;
 }

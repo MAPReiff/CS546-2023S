@@ -9,12 +9,11 @@ export const routerVenues = Router();
 
 routerVenues.route("/").get(async (req, res) => {
   //code here for GET
-  res.status(200).render("homepage", { title: "Venue Finder"});
+  res.status(200).render("homepage", { title: "Venue Finder" });
 });
 
 routerVenues.route("/searchvenues").post(async (req, res) => {
   //code here for POST
-  let valid = false;
   try {
     if (
       !req.body.searchVenueTerm ||
@@ -57,9 +56,10 @@ routerVenues.route("/searchvenues").post(async (req, res) => {
 
 routerVenues.route("/venuedetails/:id").get(async (req, res) => {
   //code here for GET
+
   try {
     let venueData = await getVenue(req.params.id);
-    venueData = venueData.data
+    venueData = venueData.data;
     let venue = {};
 
     if (venueData.errors) {
@@ -114,7 +114,11 @@ routerVenues.route("/venuedetails/:id").get(async (req, res) => {
       venue.phone = "N/A";
     }
 
-    res.status(200).render("venueByID", {title: "Venue Details", venue: venue});
+    res.status(200).render("venueByID", {
+      title: "Venue Details",
+      venue: venue,
+      useHeader: true,
+    });
   } catch (e) {
     res.status(400).render("error", { title: "Error", error: e });
   }
