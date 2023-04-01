@@ -48,7 +48,8 @@ the title set as the <title> element of the HTML document and as an h1 in your d
   <h1>{{title}}</h1>
   <h2>{{searchVenueTerm}}</h2>
 
-  {{#if venues.length}}
+  {{#if venues.length}} 
+  {{!-- thought we had to do this check in here before realizing there was a dedicated file --}}
   <ol>
     {{#each venues}}
     <li>

@@ -17,7 +17,20 @@ export async function searchVenues(searchTerm) {
   );
 
   return data;
-
 }
 
 // await(searchVenues("Madison"))
+
+export async function getVenue(venueID) {
+  if (typeof venueID != "string") {
+    throw new Error("the venue ID must be a string");
+  } else if (venueID == "" || venueID.replaceAll(" ", "") == "") {
+    throw new Error("the venue ID can not be an empty string");
+  }
+
+  const data = await axios.get(
+    `https://app.ticketmaster.com/discovery/v2/venues/${venueID}.json?apikey=${apikey}`
+  );
+
+  return data;
+}
