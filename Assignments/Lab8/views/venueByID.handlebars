@@ -23,7 +23,11 @@ the title set as the <title> element of the HTML document and as an h1 in your d
     <h2>{{venue.name}}</h2>
     <img alt="{{venue.name}}" src="{{venue.image}}">
     <br>
+    {{#if venue.url}}
     <a target="_blank" href="{{venue.url}}">Venue Information on Ticketmaster</a>
+    {{else}}
+    <p>N/A</p>
+    {{/if}}
     <address>Address: {{venue.address}}, {{venue.city}}, {{venue.state}} {{venue.postalCode}} </address>
     <address>Phone: {{venue.phone}}</address>
   </div>

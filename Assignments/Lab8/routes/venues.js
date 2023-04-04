@@ -9,7 +9,12 @@ export const routerVenues = Router();
 
 routerVenues.route("/").get(async (req, res) => {
   //code here for GET
-  res.status(200).render("homepage", { title: "Venue Finder" });
+  try {
+    res.status(200).render("homepage", { title: "Venue Finder" });
+  } catch (e) {
+    res.status(500).render("error", { title: "Error", error: "internal server error", code: "500" });
+  }
+  
 });
 
 routerVenues.route("/searchvenues").post(async (req, res) => {
@@ -50,7 +55,7 @@ routerVenues.route("/searchvenues").post(async (req, res) => {
       venues: venues,
     });
   } catch (e) {
-    res.status(400).render("error", { title: "Error", error: e });
+    res.status(400).render("error", { title: "Error", error: e, code: "400" });
   }
 });
 
@@ -80,9 +85,9 @@ routerVenues.route("/venuedetails/:id").get(async (req, res) => {
 
     if (venueData.url) {
       venue.url = venueData.url;
-    } else {
-      venue.url = "N/A";
-    }
+    } //else {  // in slack TA said if no URL, have different behavior
+    //   venue.url = "N/A";
+    // }
 
     if (venueData.address && venueData.address.line1) {
       venue.address = venueData.address.line1;
@@ -120,6 +125,6 @@ routerVenues.route("/venuedetails/:id").get(async (req, res) => {
       useHeader: true,
     });
   } catch (e) {
-    res.status(400).render("error", { title: "Error", error: e });
+    res.status(404).render("error", { title: "Error", error: e, code: "404" });
   }
 });
