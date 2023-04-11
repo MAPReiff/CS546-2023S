@@ -1,3 +1,24 @@
 /*
 You will style your page using at least 5 CSS selectors for general CSS styling. You will place the CSS in its own file. 
 */
+
+.error {
+  color: red;
+}
+
+dt {
+  font-weight: 700;
+}
+
+dd {
+  font-family: monospace;
+}
+
+h1 {
+  color: purple;
+  text-shadow: 0 0 3px #000
+}
+
+textarea {
+  border: 4px dashed rgb(206, 10, 206);
+}

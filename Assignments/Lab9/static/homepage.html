@@ -8,3 +8,39 @@ A label with a for attribute referencing your input
 A textarea element with a name and id of text_input
 A button to submit the form
  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Text Analyzer</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+  <header>
+    <h1>Text Analyzer</h1>
+  </header>
+
+  <main>
+    <form id="analyzerForm">
+      <label for="text_input">Text Input</label>
+      <br>
+      <textarea id="text_input" name="text_input" placeholder="Type here!" rows="5" cols="80"></textarea>
+      <br>
+      <input type="submit" id="submitButton" name="submitButton" value="Submit">
+    </form>
+
+    <p id="error" class="error" hidden></p>
+
+    <div id="results">      
+    </div>
+
+    <script src='js/main.js'></script>
+  </main>
+
+  <footer>
+    <p>Mitchell Reiff 10440996</p>
+  </footer>
+</body>
