@@ -12,5 +12,9 @@ export const routerText = Router();
 
 routerText.route("/").get(async (req, res) => {
   //code here
-  res.sendFile("homepage.html", { root: "./static/" })
+  try {
+    res.sendFile("homepage.html", { root: "./static/" });
+  } catch (e) {
+    res.status(500).json({ error: "500 internal server error" });
+  }
 });
