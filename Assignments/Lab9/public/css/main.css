@@ -1,3 +1,5 @@
+/* I pledge my honor that I have abided by the Stevens Honor System */
+
 /*
 You will style your page using at least 5 CSS selectors for general CSS styling. You will place the CSS in its own file. 
 */
@@ -8,6 +10,7 @@ You will style your page using at least 5 CSS selectors for general CSS styling.
 
 dt {
   font-weight: 700;
+  text-decoration: underline;
 }
 
 dd {
@@ -16,9 +19,22 @@ dd {
 
 h1 {
   color: purple;
-  text-shadow: 0 0 3px #000
+  text-shadow: 0 0 10px #fff
 }
 
 textarea {
   border: 4px dashed rgb(206, 10, 206);
+}
+
+body {
+  background-color: darksalmon;
+  cursor: crosshair;
+}
+
+input[type=submit] {
+  background-color: goldenrod;
+  border: 1px solid #000;
+  color: white;
+  padding: 10px 25px;
+  cursor: pointer;
 }

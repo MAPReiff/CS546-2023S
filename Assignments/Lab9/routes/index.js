@@ -1,3 +1,5 @@
+// I pledge my honor that I have abided by the Stevens Honor System
+
 //Here you will require route files and export them as used in previous labs.
 
 import { routerText } from "./textanalyzer.js";
