@@ -54,7 +54,49 @@ You will be using a data list element (dl), inside the dl, you will have a data 
 
 *   Here is the output based on the input: `"Helllo, my -! This is a great day to say helllo.   Helllo! 2 3 4 23"`
 
-    <dl>
+```html
+
+
+<dl>
+
+  <dt>Original Input:</dt>
+
+  <dd>Helllo, my -! This is a great day to say helllo.   Helllo! 2 3 4 23</dd>
+
+  <dt>Total Letters</dt>
+
+  <dd>40</dd>
+
+  <dt>Total Non-Letters</dt>
+
+  <dd>27</dd>
+
+  <dt>Total Vowels</dt>
+
+  <dd>14</dd>
+
+  <dt>Total Consonants</dt>
+
+  <dd>26</dd>
+
+  <dt>Total Words</dt>
+
+  <dd>11</dd>
+
+  <dt>Unique Words</dt>
+
+  <dd>9</dd>
+
+  <dt>Long Words</dt>
+
+  <dd>3</dd>
+
+  <dt>Short Words</dt>
+
+  <dd>6</dd>
+
+</dl>
+```
 
 You will generate the above HTML and append it to the div every time the form is submitted, so you will have multiple data lists (dl) in the div, one for each time the user inputs and processes some text. So for example:
 
@@ -68,7 +110,133 @@ If the user submitted the following input and processed it:
 
 Your div would look like this:
 
-    <div id="results">
+```html
+
+
+<div id="results">
+
+  <dl>
+
+    <dt>Original Input:</dt>
+
+    <dd>Helllo, my -! This is a great day to say helllo.   Helllo! 2 3 4 23</dd>
+
+    <dt>Total Letters</dt>
+
+    <dd>40</dd>
+
+    <dt>Total Non-Letters</dt>
+
+    <dd>27</dd>
+
+    <dt>Total Vowels</dt>
+
+    <dd>14</dd>
+
+    <dt>Total Consonants</dt>
+
+    <dd>26</dd>
+
+    <dt>Total Words</dt>
+
+    <dd>11</dd>
+
+    <dt>Unique Words</dt>
+
+    <dd>9</dd>
+
+    <dt>Long Words</dt>
+
+    <dd>3</dd>
+
+    <dt>Short Words</dt>
+
+    <dd>6</dd>
+
+  </dl>
+
+  <dl>
+
+    <dt>Original Input:</dt>
+
+    <dd>The quick brown fox jumps over the lazy dog.</dd>
+
+    <dt>Total Letters</dt>
+
+    <dd>35</dd>
+
+    <dt>Total Non-Letters</dt>
+
+    <dd>9</dd>
+
+    <dt>Total Vowels</dt>
+
+    <dd>11</dd>
+
+    <dt>Total Consonants</dt>
+
+    <dd>24</dd>
+
+    <dt>Total Words</dt>
+
+    <dd>9</dd>
+
+    <dt>Unique Words</dt>
+
+    <dd>8</dd>
+
+    <dt>Long Words</dt>
+
+    <dd>0</dd>
+
+    <dt>Short Words</dt>
+
+    <dd>4</dd>
+
+  </dl>
+
+  <dl>
+
+    <dt>Original Input:</dt>
+
+    <dd>Helllo, my -! This is a great day to say helllo.   Helllo! 2 3 4 23</dd>
+
+    <dt>Total Letters</dt>
+
+    <dd>40</dd>
+
+    <dt>Total Non-Letters</dt>
+
+    <dd>27</dd>
+
+    <dt>Total Vowels</dt>
+
+    <dd>14</dd>
+
+    <dt>Total Consonants</dt>
+
+    <dd>26</dd>
+
+    <dt>Total Words</dt>
+
+    <dd>11</dd>
+
+    <dt>Unique Words</dt>
+
+    <dd>9</dd>
+
+    <dt>Long Words</dt>
+
+    <dd>3</dd>
+
+    <dt>Short Words</dt>
+
+    <dd>6</dd>
+
+  </dl>
+
+</div>
+```
 
 If the user does not have a value for the input when they submit, you should not continue processing and instead should inform them of the error on the page. If the user enters bad data, you should not continue processing and instead inform them of the error on the page.
 
