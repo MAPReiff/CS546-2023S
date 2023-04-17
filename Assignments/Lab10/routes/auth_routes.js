@@ -1,4 +1,6 @@
 //import express, express router as shown in lecture code
+import {Router} from "express"
+export const router = Router()
 
 router.route('/').get(async (req, res) => {
   //code here for GET THIS ROUTE SHOULD NEVER FIRE BECAUSE OF MIDDLEWARE #1 IN SPECS.
