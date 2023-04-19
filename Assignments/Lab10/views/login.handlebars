@@ -5,20 +5,23 @@ login form handlebar template
 --}}
 
 <script src="/public/js/lab10.js"></script>
-{{!-- error in routejs --}}
+
 {{#if error}}
 <p id="error" class="error">{{error}}</p>
+{{else}}
+<p id="error" class="error" hidden></p>
 {{/if}}
+
 
 {{!-- error in clientjs --}}
 <p id="errorClient" class="error" hidden></p>
 
 <form action="/login" method="POST" class="login-form" id="login-form">
   <label for="emailAddressInput">Email Address</label>
-  <input type="email" id="emailAddressInput" name="emailAddressInput" placeholder="Email Address">
+  <input type="email" id="emailAddressInput" name="emailAddressInput" placeholder="Email Address" required>
   <br><br>
   <label for="passwordInput">Password</label>
-  <input type="password" id="passwordInput" name="passwordInput" placeholder="Password">
+  <input type="password" id="passwordInput" name="passwordInput" placeholder="Password" required>
   <br><br>
   <div class="text-center">
     <input type="submit" id="submitButton" name="submitButton" value="Submit">

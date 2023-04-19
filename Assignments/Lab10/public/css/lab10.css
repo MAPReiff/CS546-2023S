@@ -43,9 +43,8 @@ h1 {
   color: blue;
 }
 
-.adminLink {
+a.adminLink {
   font-style: italic;
-  
   border-style: dashed;
   border-color: red;
   padding: 10px;

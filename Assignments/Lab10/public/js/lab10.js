@@ -19,7 +19,7 @@ if (route == "/register") {
             "confirmPasswordInput"
           ).value;
           let role = document.getElementById("roleInput").value;
-          let errorP = document.getElementById("errorClient");
+          let errorP = document.getElementById("error");
           try {
             checkName(firstName, "first name");
             checkName(lastName, "last name");
@@ -50,7 +50,7 @@ if (route == "/login") {
         event.preventDefault();
         let emailAddress = document.getElementById("emailAddressInput").value;
         let password = document.getElementById("passwordInput").value;
-        let errorP = document.getElementById("errorClient");
+        let errorP = document.getElementById("error");
         try {
           checkEmail(emailAddress);
           checkPassword(password);
@@ -117,6 +117,8 @@ const checkEmail = (emailAddress) => {
 
   emailAddress = emailAddress.trim().toLowerCase();
 
+  
+
   if (emailAddress.replaceAll(" ", "").length == 0) {
     throw new Error("email string must contain text and not only spaces");
   }
@@ -127,6 +129,8 @@ const checkEmail = (emailAddress) => {
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
     return regexExp.test(str);
   }
+
+  console.log(checkIfEmail(emailAddress))
 
   if (checkIfEmail(emailAddress) == false) {
     throw new Error("please enter a valid email address");
