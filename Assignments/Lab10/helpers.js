@@ -83,3 +83,19 @@ export const checkPassword = (password) => {
 
   return password;
 };
+
+export const checkRole = (role) => {
+  if (typeof role == "undefined") {
+    throw new Error("please supply a role string");
+  } else if (typeof role != "string") {
+    throw new Error("please supply a role string");
+  }
+
+  role = role.trim().toLowerCase();
+
+  if (role != "user" && role != "admin") {
+    throw new Error("role string must be either user or admin");
+  }
+
+  return role;
+}

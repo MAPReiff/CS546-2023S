@@ -1,7 +1,7 @@
 //import mongo collections, bcrypt and implement the following emailAddress functions
 
 import { users } from "../config/mongoCollections.js";
-import { checkName, checkEmail, checkPassword } from "../helpers.js";
+import { checkName, checkEmail, checkPassword, checkRole } from "../helpers.js";
 import { ObjectId } from "mongodb";
 import bcrypt from "bcrypt";
 
@@ -29,17 +29,7 @@ export const createUser = async (
 
   password = checkPassword(password);
 
-  if (typeof role == "undefined") {
-    throw new Error("please supply a role string");
-  } else if (typeof role != "string") {
-    throw new Error("please supply a role string");
-  }
-
-  role = role.trim().toLowerCase();
-
-  if (role != "user" && role != "admin") {
-    throw new Error("role string must be either user or admin");
-  }
+  role = checkRole(role);
 
   let user = {
     firstName: firstName,

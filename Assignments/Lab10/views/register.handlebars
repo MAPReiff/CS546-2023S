@@ -3,34 +3,42 @@
 login form handlebar template
 
 --}}
+<script  src="/public/js/lab10.js"></script>
+{{!-- error in routejs --}}
+{{#if error}}
+<p id="error" class="error">{{error}}</p>
+{{/if}}
 
-<p id="error" class="error" hidden></p>
+{{!-- error in clientjs --}}
+<p id="errorC" class="error" hidden></p>
+
 
 <form action="/register" method="POST" class="registration-form" id="registration-form">
   <label for="firstNameInput">First Name</label>
-  <input type="text" id="firstNameInput" name="firstNameInput" placeholder="First Name">
+  <input type="text" id="firstNameInput" name="firstNameInput" placeholder="First Name" required>
   <br><br>
   <label for="lastNameInput">Last Name</label>
-  <input type="text" id="lastNameInput" name="lastNameInput" placeholder="Last Name">
+  <input type="text" id="lastNameInput" name="lastNameInput" placeholder="Last Name" required>
   <br><br>
   <label for="emailAddressInput">Email Address</label>
-  <input type="email" id="emailAddressInput" name="emailAddressInput" placeholder="Email Address">
+  <input type="email" id="emailAddressInput" name="emailAddressInput" placeholder="Email Address" required>
   <br><br>
   <label for="passwordInput">Password</label>
-  <input type="password" id="passwordInput" name="passwordInput" placeholder="Password">
+  <input type="password" id="passwordInput" name="passwordInput" placeholder="Password" required>
   <br><br>
   <label for="confirmPasswordInput">Confirm Password</label>
-  <input type="password" id="confirmPasswordInput" name="confirmPasswordInput" placeholder="Confirm Password">
+  <input type="password" id="confirmPasswordInput" name="confirmPasswordInput" placeholder="Confirm Password" required>
   <br><br>
   <label for="roleInput">Role</label>
-  <select id="roleInput" name="roleInput">
-    <option value="default" selected disabled hidden>Pick a Role</option>
+  <select id="roleInput" name="roleInput" required>
+    {{!-- <option value="default" selected disabled hidden>Pick a Role</option> --}}
+    {{!-- the above was causing some issues but looked nicer --}}
     <option value="admin">Admin</option>
-    <option value="user">User</option>
+    <option value="user" selected>User</option>
   </select>
   <br><br>
   <div class="text-center">
-      <input type="submit" id="submitButton" name="submitButton" value="Submit">
+    <input type="submit" id="submitButton" name="submitButton" value="Submit">
   </div>
 </form>
 
