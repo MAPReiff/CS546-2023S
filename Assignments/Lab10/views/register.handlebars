@@ -3,14 +3,14 @@
 login form handlebar template
 
 --}}
-<script  src="/public/js/lab10.js"></script>
+<script src="/public/js/lab10.js"></script>
 {{!-- error in routejs --}}
 {{#if error}}
 <p id="error" class="error">{{error}}</p>
 {{/if}}
 
 {{!-- error in clientjs --}}
-<p id="errorC" class="error" hidden></p>
+<p id="errorClient" class="error" hidden></p>
 
 
 <form action="/register" method="POST" class="registration-form" id="registration-form">
