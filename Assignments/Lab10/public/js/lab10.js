@@ -107,7 +107,7 @@ const checkRole = (role) => {
   return role;
 };
 
-// cant use node modules in the browser gotta do it by hand
+// cant use node modules in the browser gotta do these 2 by hand
 const checkEmail = (emailAddress) => {
   if (typeof emailAddress == "undefined") {
     throw new Error("please provide an email string");

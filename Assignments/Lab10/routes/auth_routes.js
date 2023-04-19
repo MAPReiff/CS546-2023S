@@ -60,12 +60,12 @@ router
           // res.status(200).render("login", { title: "Login" });
           res.status(200).redirect("/login");
         } else {
-          throw new Error("unable to create user")
+          throw new Error("unable to create user");
         }
       }
     } catch (e) {
       // render form with 400 code
-      res.status(400).render("register", {title: "Register", error: `${e}`});
+      res.status(400).render("register", { title: "Register", error: `${e}` });
     }
   });
 
@@ -85,10 +85,31 @@ router
   })
   .post(async (req, res) => {
     //code here for POST
+    try {
+      if (
+        req.body.hasOwnProperty("emailAddressInput") &&
+        req.body.hasOwnProperty("passwordInput")
+      ) {
+        let emailAddress = checkEmail(req.body["emailAddressInput"]);
+        let password = checkPassword(req.body["passwordInput"]);
+
+        let user = await checkUser(emailAddress, password);
+
+        if (user) {
+          // res.status(200).render("login", { title: "Login" });
+          res.status(200).redirect("/protected");
+        } else {
+          throw new Error("unable to login");
+        }
+      }
+    } catch (e) {
+      res.status(400).render("login", { title: "Login", error: `${e}` });
+    }
   });
 
 router.route("/protected").get(async (req, res) => {
   //code here for GET
+  res.json({ message: "You are logged in!" });
 });
 
 router.route("/admin").get(async (req, res) => {

@@ -18,3 +18,7 @@ input[type=submit] {
 .text-center {
   text-align: center;
 }
+
+p.error {
+  color: rgb(255 85 85);
+}

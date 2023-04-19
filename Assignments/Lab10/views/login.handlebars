@@ -4,7 +4,14 @@ login form handlebar template
 
 --}}
 
-<p id="error" class="error" hidden></p>
+<script src="/public/js/lab10.js"></script>
+{{!-- error in routejs --}}
+{{#if error}}
+<p id="error" class="error">{{error}}</p>
+{{/if}}
+
+{{!-- error in clientjs --}}
+<p id="errorClient" class="error" hidden></p>
 
 <form action="/login" method="POST" class="login-form" id="login-form">
   <label for="emailAddressInput">Email Address</label>
