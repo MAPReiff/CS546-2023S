@@ -91,6 +91,16 @@ app.use(
 app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+// middleware 7
+app.use((req, res, next) => {
+  console.log(
+    `[${new Date().toUTCString()}]: ${req.method} ${req.originalUrl} (${
+      req.session.user ? "Authenticated" : "Non-Authenticated"
+    } User)`
+  );
+  next();
+});
+
 routesMethod(app);
 
 app.listen(3000, () => {

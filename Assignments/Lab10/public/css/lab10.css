@@ -7,18 +7,47 @@ form {
 
 input {
   width: 100%;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   /* padding: 10px; */
 }
 
 input[type=submit] {
-  width:25%;
+  width: 25%;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   /* for some reason, 100% width does not actully work on the buttons? */
 }
+
 /* From https://coder-coder.com/how-to-center-button-with-html-css/ */
 .text-center {
   text-align: center;
+  /* make width work for button */
 }
 
 p.error {
   color: rgb(255 85 85);
+}
+
+a {
+  color: green;
+}
+
+a:hover {
+  color: purple;
+}
+
+body {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+h1 {
+  color: blue;
+}
+
+.adminLink {
+  font-style: italic;
+  
+  border-style: dashed;
+  border-color: red;
+  padding: 10px;
+  margin: 0 auto;
 }
